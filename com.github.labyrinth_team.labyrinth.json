@@ -1,19 +1,12 @@
 {
     "app-id": "com.github.labyrinth_team.labyrinth",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.28",
+    "runtime-version": "3.34",
     "sdk": "org.gnome.Sdk",
     "command": "labyrinth",
     "rename-appdata-file": "labyrinth.appdata.xml",
     "rename-desktop-file": "labyrinth.desktop",
     "rename-icon": "labyrinth",
-    "build-options": {
-        "cflags": "-O2 -g",
-        "cxxflags": "-O2 -g",
-        "env": {
-            "V": "1"
-        }
-    },
     "finish-args": [
         "--socket=x11",
         "--share=ipc",
@@ -27,87 +20,79 @@
         "/share/man"
     ],
     "modules": [
-        {
-            "name": "py2cairo",
-            "rm-configure": true,
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "http://cairographics.org/releases/py2cairo-1.10.0.tar.bz2",
-                    "sha256": "d30439f06c2ec1a39e27464c6c828b6eface3b22ee17b2de05dc409e429a7431"
-                },
-                {
-                    "type": "script",
-                    "commands": [
-                        "libtoolize --force",
-                        "aclocal",
-                        "autoheader",
-                        "automake --force-missing --add-missing --foreign",
-                        "autoconf"
-                    ],
-                    "dest-filename": "autogen.sh"
-                }
-            ]
-        },
-        {
-            "name": "pygobject",
-            "config-opts": [ "--disable-introspection" ],
-            "cleanup": [
-                "/bin"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "http://ftp.gnome.org/pub/GNOME/sources/pygobject/2.28/pygobject-2.28.7.tar.xz",
-                    "sha256": "bb9d25a3442ca7511385a7c01b057492095c263784ef31231ffe589d83a96a5a"
-                },
-                {
-                    "type": "shell",
-                    "commands": [ "cp -p /usr/share/automake-*/config.{sub,guess} ." ]
-                }
-            ]
-        },
-        {
-            "name": "libglade",
-            "rm-configure": true,
-            "cleanup": [
-                "/bin"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "http://ftp.gnome.org/pub/GNOME/sources/libglade/2.6/libglade-2.6.4.tar.gz",
-                    "sha256": "c41d189b68457976069073e48d6c14c183075d8b1d8077cb6dfb8b7c5097add3"
-                },
-                {
-                    "type": "shell",
-                    "commands": [
-                        "rm -f config.guess"
-                    ]
-                },
-                {
-                    "type": "script",
-                    "commands": [
-                        "autoreconf -fiv"
-                    ],
-                    "dest-filename": "autogen.sh"
-                }
-            ]
-        },
+        "shared-modules/gtk2/gtk2.json",
+        "shared-modules/python2.7/python-2.7.json",
         {
             "name": "pygtk",
-            "cleanup": [
-                "/bin"
-            ],
+            "config-opts": ["--disable-docs"],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://ftp.gnome.org/pub/GNOME/sources/pygtk/2.24/pygtk-2.24.0.tar.gz",
+                    "url": "https://download.gnome.org/sources/pygtk/2.24/pygtk-2.24.0.tar.gz",
                     "sha256": "6e3e54fa6e65a69ac60bd58cb2e60a57f3346ac52efe995f3d10b6c38c972fd8"
                 },
                 {
+                    "type": "patch",
+                    "path": "pygtk-Drop-the-PangoFont-find_shaper-virtual-method.patch"
+                },
+                {
                     "type": "shell",
-                    "commands": [ "cp -p /usr/share/automake-*/config.{sub,guess} ." ]
+                    "commands": [
+                        "cp -p /usr/share/automake-*/config.{sub,guess} ."
+                    ]
+                }
+            ],
+            "modules": [
+                {
+                    "name": "python2-pycairo",
+                    "buildsystem": "meson",
+                    "config-opts": ["-Dpython=python2"],
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://github.com/pygobject/pycairo/releases/download/v1.18.1/pycairo-1.18.1.tar.gz",
+                            "sha256": "70172e58b6bad7572a3518c26729b074acdde15e6fee6cbab6d3528ad552b786"
+                        }
+                    ]
+                },
+                {
+                    "name": "pygobject",
+                    "config-opts": ["--disable-glibtest"],
+                    "cleanup": ["/bin"],
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://download.gnome.org/sources/pygobject/2.28/pygobject-2.28.7.tar.xz",
+                            "sha256": "bb9d25a3442ca7511385a7c01b057492095c263784ef31231ffe589d83a96a5a"
+                        }
+                    ]
+                },
+                {
+                    "name": "libglade",
+                    "rm-configure": true,
+                    "cleanup": [
+                        "/bin"
+                    ],
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://download.gnome.org/sources/libglade/2.6/libglade-2.6.4.tar.gz",
+                            "sha256": "c41d189b68457976069073e48d6c14c183075d8b1d8077cb6dfb8b7c5097add3"
+                        },
+                        {
+                            "type": "shell",
+                            "commands": [
+                                "rm -f config.guess"
+                            ]
+                        },
+                        {
+                            "type": "script",
+                            "commands": [
+                                "autoreconf -fiv"
+                            ],
+                            "dest-filename": "autogen.sh"
+                        }
+                    ]
                 }
             ]
         },
