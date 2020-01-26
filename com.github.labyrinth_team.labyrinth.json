@@ -4,7 +4,6 @@
     "runtime-version": "3.34",
     "sdk": "org.gnome.Sdk",
     "command": "labyrinth",
-    "rename-appdata-file": "labyrinth.appdata.xml",
     "rename-desktop-file": "labyrinth.desktop",
     "rename-icon": "labyrinth",
     "finish-args": [
@@ -105,7 +104,7 @@
                 "python setup.py install --prefix=/app",
                 "sed -i -e 's|usr|app|' install_data_files.sh",
                 "./install_data_files.sh",
-                "install -D labyrinth.appdata.xml /app/share/metainfo/labyrinth.appdata.xml"
+                "install -D ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml"
             ],
             "sources": [
                 {
@@ -123,7 +122,7 @@
                 },
                 {
                     "type": "file",
-                    "path": "labyrinth.appdata.xml"
+                    "path": "com.github.labyrinth_team.labyrinth.metainfo.xml"
                 }
             ]
         }
