@@ -33,8 +33,7 @@
   </releases>
   <screenshots>
     <screenshot>
-      <image type="source">https://screenshots.debian.net/screenshots/000/009/362/large.png</image>
-      <image type="source">https://screenshots.debian.net/screenshots/000/009/194/large.png</image>
+      <image type="source">https://raw.githubusercontent.com/bbhtt/com.github.labyrinth_team.labyrinth/runtime-44/screenshot.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/labyrinth-team/labyrinth</url>
