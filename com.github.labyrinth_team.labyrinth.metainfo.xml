@@ -34,7 +34,7 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/bbhtt/com.github.labyrinth_team.labyrinth/runtime-44/screenshot.png</image>
+      <image type="source">https://raw.githubusercontent.com/flathub/com.github.labyrinth_team.labyrinth/master/screenshot.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/labyrinth-team/labyrinth</url>
