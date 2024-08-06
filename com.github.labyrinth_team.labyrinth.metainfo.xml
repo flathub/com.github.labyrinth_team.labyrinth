@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>Labyrinth</name>
+  <developer_name>Labyrinth Team</developer_name>
   <launchable type="desktop-id">com.github.labyrinth_team.labyrinth.desktop</launchable>
   <summary>A light weight mind mapping tool</summary>
   <description>
@@ -32,7 +33,7 @@
     <release date="2012-11-02" version="0.6"/>
   </releases>
   <screenshots>
-    <screenshot>
+    <screenshot type="default">
       <image type="source">https://raw.githubusercontent.com/bbhtt/com.github.labyrinth_team.labyrinth/runtime-44/screenshot.png</image>
     </screenshot>
   </screenshots>
